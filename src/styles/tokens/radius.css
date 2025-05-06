@@ -1,0 +1,6 @@
+:root {
+  --radius-small: var(--spacing-2);
+  --radius-medium: var(--spacing-4);
+  --radius-large: var(--spacing-7);
+  --radius-full: 99999px;
+}

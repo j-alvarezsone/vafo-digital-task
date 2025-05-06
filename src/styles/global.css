@@ -1,3 +1,5 @@
 @import './tokens/primitives.css';
 @import './tokens/colour.css';
 @import './tokens/typography.css';
+@import './tokens/spacing.css';
+@import './tokens/radius.css';
