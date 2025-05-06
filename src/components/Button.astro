@@ -1,0 +1,30 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary';
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  onClick?: string;
+  label?: string;
+}
+
+
+const {
+  variant = 'primary',
+  type = 'button',
+  disabled = false,
+  onClick = '',
+  label = ''
+} = Astro.props;
+
+
+const buttonClass = `btn-${variant}`;
+---
+
+<button
+  class={buttonClass}
+  type={type}
+  disabled={disabled}
+  onclick={onClick}
+>
+  <slot>{label}</slot>
+</button>

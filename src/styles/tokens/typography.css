@@ -57,3 +57,76 @@
   --font-c1-line-height: 14px;
   --font-c1-letter-spacing: 0;
 }
+
+
+.font-display {
+  font-family: var(--font-display-family);
+  font-weight: var(--font-display-weight);
+  font-size: var(--font-display-size);
+  line-height: var(--font-display-line-height);
+  letter-spacing: var(--font-display-letter-spacing);
+}
+
+.font-h1 {
+  font-family: var(--font-h1-family);
+  font-weight: var(--font-h1-weight);
+  font-size: var(--font-h1-size);
+  line-height: var(--font-h1-line-height);
+  letter-spacing: var(--font-h1-letter-spacing);
+}
+
+.font-h2 {
+  font-family: var(--font-h2-family);
+  font-weight: var(--font-h2-weight);
+  font-size: var(--font-h2-size);
+  line-height: var(--font-h2-line-height);
+  letter-spacing: var(--font-h2-letter-spacing);
+}
+
+.font-h3 {
+  font-family: var(--font-h3-family);
+  font-weight: var(--font-h3-weight);
+  font-size: var(--font-h3-size);
+  line-height: var(--font-h3-line-height);
+  letter-spacing: var(--font-h3-letter-spacing);
+}
+
+.font-s1 {
+  font-family: var(--font-s1-family);
+  font-weight: var(--font-s1-weight);
+  font-size: var(--font-s1-size);
+  line-height: var(--font-s1-line-height);
+  letter-spacing: var(--font-s1-letter-spacing);
+}
+
+.font-s2 {
+  font-family: var(--font-s2-family);
+  font-weight: var(--font-s2-weight);
+  font-size: var(--font-s2-size);
+  line-height: var(--font-s2-line-height);
+  letter-spacing: var(--font-s2-letter-spacing);
+}
+
+.font-p1 {
+  font-family: var(--font-p1-family);
+  font-weight: var(--font-p1-weight);
+  font-size: var(--font-p1-size);
+  line-height: var(--font-p1-line-height);
+  letter-spacing: var(--font-p1-letter-spacing);
+}
+
+.font-p2 {
+  font-family: var(--font-p2-family);
+  font-weight: var(--font-p2-weight);
+  font-size: var(--font-p2-size);
+  line-height: var(--font-p2-line-height);
+  letter-spacing: var(--font-p2-letter-spacing);
+}
+
+.font-c1 {
+  font-family: var(--font-c1-family);
+  font-weight: var(--font-c1-weight);
+  font-size: var(--font-c1-size);
+  line-height: var(--font-c1-line-height);
+  letter-spacing: var(--font-c1-letter-spacing);
+}
