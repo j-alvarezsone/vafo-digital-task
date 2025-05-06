@@ -25,17 +25,17 @@
   --font-h3-letter-spacing: 0;
 
 
-  --font-s1-lg-family: 'Poppins', sans-serif;
-  --font-s1-lg-weight: 500;
-  --font-s1-lg-size: 18px;
-  --font-s1-lg-line-height: 26px;
-  --font-s1-lg-letter-spacing: 0;
+  --font-s1-family: 'Poppins', sans-serif;
+  --font-s1-weight: 500;
+  --font-s1-size: 18px;
+  --font-s1-line-height: 26px;
+  --font-s1-letter-spacing: 0;
 
-  --font-s1-base-family: 'Poppins', sans-serif;
-  --font-s1-base-weight: 500;
-  --font-s1-base-size: 16px;
-  --font-s1-base-line-height: 24px;
-  --font-s1-base-letter-spacing: 0;
+  --font-s2-family: 'Poppins', sans-serif;
+  --font-s2-weight: 500;
+  --font-s2-size: 16px;
+  --font-s2-line-height: 24px;
+  --font-s2-letter-spacing: 0;
 
 
   --font-p1-family: 'Poppins', sans-serif;
