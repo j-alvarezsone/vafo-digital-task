@@ -1,0 +1,18 @@
+:root {
+  --primary-text: var(--neutral-1000);
+  --secondary-text: var(--neutral-700);
+  --minimal-text: var(--neutral-400);
+  --disabled-text: var(--neutral-150);
+  --invert-text: var(--neutral-0);
+  --brand-text: var(--purple-500);
+
+  --primary-surface: var(--neutral-0);
+  --secondary-surface: var(--cream-200);
+  --invert-surface: var(--neutral-1000);
+  --brand-surface: var(--purple-50);
+
+  --primary-border: var(--neutral-1000);
+  --secondary-border: var(--black-30);
+  --minimal-border: var(--black-15);
+  --invert-border: var(--neutral-0);
+}
