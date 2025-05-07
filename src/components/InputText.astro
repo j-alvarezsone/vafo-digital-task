@@ -36,8 +36,10 @@ const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : 
   }
 
   .input-text__label {
-    color: var(----primary-text);
+    color: var(--primary-text);
     text-transform: capitalize;
+    width: min-content;
+    white-space: nowrap;
   }
 
   .input-text__label--disabled {
@@ -66,7 +68,7 @@ const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : 
       outline: rgba(0, 56, 255, 0.4) solid 2px;
     }
 
-    &:not(:focus):not(:placeholder-shown) {
+    &:not(:focus):not(:placeholder-shown):not(:hover) {
       border: 2px solid var(--primary-border);
     }
 
@@ -76,7 +78,7 @@ const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : 
 
     &:disabled {
       background-color: var(--disabled-surface);
-      border: 1px solid var(----minimal-border);
+      border: 1px solid var(--minimal-border);
       color: var(--disabled-text);
       cursor: not-allowed;
     }
