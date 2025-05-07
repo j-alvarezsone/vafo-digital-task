@@ -16,4 +16,6 @@
   --secondary-border: var(--black-30);
   --minimal-border: var(--black-15);
   --invert-border: var(--neutral-0);
+
+  --focus-outline: rgba(0, 56, 255, 0.4);
 }

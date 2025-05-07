@@ -65,7 +65,7 @@ const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : 
 
     &:focus {
       border: 1px solid transparent;
-      outline: rgba(0, 56, 255, 0.4) solid 2px;
+      outline: var(--focus-outline) solid 2px;
     }
 
     &:not(:focus):not(:placeholder-shown):not(:hover) {
