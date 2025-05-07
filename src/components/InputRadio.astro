@@ -1,0 +1,122 @@
+---
+interface Props {
+  label: string;
+  name: string;
+  autoComplete?: string;
+  disabled?: boolean;
+  bordered?: boolean;
+}
+
+const { label, name, disabled = false, bordered = true } = Astro.props;
+---
+
+<div class={`input-radio ${bordered ? 'input-radio--border' : 'input-radio--no-border'}`}>
+  <label for={name} class={`font-p2  ${disabled ? 'input-radio__label--disabled' : 'input-radio__label'}`}>
+    {label}
+  </label>
+  <input id={name} type='radio' name={name} class='input-radio__input' disabled={disabled} />
+</div>
+
+<style>
+  .input-radio {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: flex-start;
+    padding: var(--spacing-5, --spacing-6);
+  }
+
+  .input-radio--border {
+    border: 1px solid var(--secondary-border);
+    background-color: var(--primary-surface);
+    border-radius: var(--radius-medium);
+
+    &:hover:has(.input-radio__input:not(:disabled)) {
+      border: 1px solid var(--primary-border);
+    }
+
+    &:active:has(.input-radio__input:not(:disabled)) {
+      border: 2px solid var(--primary-border);
+    }
+  }
+
+  .input-radio--no-border {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .input-radio__label {
+    color: var(--primary-text);
+  }
+
+  .input-radio__label:not(:checked) {
+    color: var(--secondary-text);
+  }
+
+  .input-radio__label--disabled {
+    color: var(--disabled-text);
+    cursor: not-allowed;
+  }
+
+  .input-radio__input {
+    color: var(--primary-text);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 1px solid var(--primary-border);
+    border-radius: var(--radius-full);
+    width: 20px;
+    height: 20px;
+    position: relative;
+    background-color: white;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    &:focus:not(:disabled) {
+      outline: var(--focus-outline) solid 2px;
+      outline-offset: 1px;
+    }
+
+    &:active:not(:focus):not(:disabled) {
+      outline: var(--focus-outline) solid 2px;
+      outline-offset: 1px;
+    }
+
+    &:disabled {
+      background-color: var(--disabled-surface);
+      border: 1px solid var(--minimal-border);
+      color: var(--disabled-text);
+      cursor: not-allowed;
+    }
+  }
+
+  .input-radio:has(.input-radio__input:checked):has(.input-radio--border) {
+    border: 1px solid var(--primary-border);
+
+    &:active {
+      border: 2px solid var(--primary-border);
+    }
+  }
+
+  .input-radio.input-radio--border:has(.input-radio__input:disabled) {
+    background-color: var(--disabled-surface);
+    border: 1px solid var(--minimal-border);
+    color: var(--disabled-text);
+    cursor: not-allowed;
+  }
+
+  .input-radio__input:checked::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-full);
+    transform: translate(-50%, -50%);
+    background-color: var(--invert-surface);
+  }
+</style>
