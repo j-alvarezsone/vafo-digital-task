@@ -7,24 +7,11 @@ interface Props {
   label?: string;
 }
 
-
-const {
-  variant = 'primary',
-  type = 'button',
-  disabled = false,
-  onClick = '',
-  label = ''
-} = Astro.props;
-
+const { variant = 'primary', type = 'button', disabled = false, onClick = '', label = '' } = Astro.props;
 
 const buttonClass = `btn-${variant}`;
 ---
 
-<button
-  class={buttonClass}
-  type={type}
-  disabled={disabled}
-  onclick={onClick}
->
+<button class={buttonClass} type={type} disabled={disabled} onclick={onClick}>
   <slot>{label}</slot>
 </button>

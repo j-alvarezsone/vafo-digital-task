@@ -10,6 +10,7 @@
   --secondary-surface: var(--cream-200);
   --invert-surface: var(--neutral-1000);
   --brand-surface: var(--purple-50);
+  --disabled-surface: var(--black-6);
 
   --primary-border: var(--neutral-1000);
   --secondary-border: var(--black-30);
