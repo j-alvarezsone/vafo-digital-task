@@ -5,6 +5,7 @@
   --disabled-text: var(--neutral-150);
   --invert-text: var(--neutral-0);
   --brand-text: var(--purple-500);
+  --brand-border: var(--purple-500);
 
   --primary-surface: var(--neutral-0);
   --secondary-surface: var(--cream-200);

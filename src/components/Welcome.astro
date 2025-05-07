@@ -4,6 +4,13 @@ import InputCheckbox from './InputCheckbox.astro';
 import InputSelect from './InputSelect.astro';
 import InputText from './InputText.astro';
 import InputRadio from './InputRadio.astro';
+import Carousel from './Carousel.vue';
+
+const images = [
+  'https://picsum.photos/600/600?random=1',
+  'https://picsum.photos/600/600?random=2',
+  'https://picsum.photos/600/600?random=3',
+];
 ---
 
 <div id='container'>
@@ -28,6 +35,8 @@ import InputRadio from './InputRadio.astro';
     <InputCheckbox name='check' label='I agree to the terms and conditions' />
     <InputRadio name='radio' label='Vue' />
   </form>
+  <h2>Carousel</h2>
+  <Carousel client:load images={images} />
 </div>
 
 <style>
@@ -36,6 +45,8 @@ import InputRadio from './InputRadio.astro';
     flex-direction: column;
     align-items: center;
     height: 100%;
+    padding: var(--spacing-10);
+    overflow-y: auto;
   }
 
   h2 {
