@@ -56,4 +56,14 @@ import InputRadio from './InputRadio.astro';
     max-width: 600px;
     width: 100%;
   }
+
+  @media (max-width: 768px) {
+    #container {
+      padding: var(--spacing-6);
+    }
+
+    .button-container {
+      flex-direction: column;
+    }
+  }
 </style>
