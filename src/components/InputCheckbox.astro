@@ -2,27 +2,18 @@
 interface Props {
   label: string;
   name: string;
-  placeholder?: string;
-  autoComplete?: string;
   disabled?: boolean;
   bordered?: boolean;
 }
 
-const { label, name, placeholder, disabled = false, bordered = true } = Astro.props;
+const { label, name, disabled = false, bordered = true } = Astro.props;
 ---
 
 <div class={`input-checkbox ${bordered ? 'input-checkbox--border' : 'input-checkbox--no-border'}`}>
   <label for={name} class={`font-p2  ${disabled ? 'input-checkbox__label--disabled' : 'input-checkbox__label'}`}>
     {label}
   </label>
-  <input
-    id={name}
-    type='checkbox'
-    name={name}
-    placeholder={placeholder}
-    class='input-checkbox__input'
-    disabled={disabled}
-  />
+  <input id={name} type='checkbox' name={name} class='input-checkbox__input' disabled={disabled} />
 </div>
 
 <style>
@@ -113,7 +104,7 @@ const { label, name, placeholder, disabled = false, bordered = true } = Astro.pr
     }
   }
 
-  .input-checkbox:has(.input-checkbox__input:disabled) {
+  .input-checkbox.input-checkbox--border:has(.input-checkbox__input:disabled) {
     background-color: var(--disabled-surface);
     border: 1px solid var(--minimal-border);
     color: var(--disabled-text);
