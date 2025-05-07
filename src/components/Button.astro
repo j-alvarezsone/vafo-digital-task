@@ -3,15 +3,90 @@ interface Props {
   variant?: 'primary' | 'secondary';
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
-  onClick?: string;
   label?: string;
 }
 
-const { variant = 'primary', type = 'button', disabled = false, onClick = '', label = '' } = Astro.props;
+const { variant = 'primary', type = 'button', disabled = false, label = '' } = Astro.props;
 
 const buttonClass = `btn-${variant}`;
 ---
 
-<button class={buttonClass} type={type} disabled={disabled} onclick={onClick}>
+<button class={buttonClass} type={type} disabled={disabled}>
   <slot>{label}</slot>
 </button>
+
+<style>
+  .btn-primary {
+    background-color: var(--neutral-1000);
+    border: none;
+    border-radius: var(--spacing-4);
+    color: var(--neutral-0);
+    cursor: pointer;
+    font-family: var(--font-s2-family);
+    font-weight: var(--font-s2-weight);
+    font-size: var(--font-s2-size);
+    line-height: var(--font-s2-line-height);
+    letter-spacing: var(--font-s2-letter-spacing);
+    padding: var(--spacing-7) var(--spacing-10);
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--black-80);
+      color: var(--neutral-0);
+    }
+
+    &:focus {
+      background-color: var(--neutral-1000);
+      color: var(--neutral-0);
+      outline: rgba(0, 56, 255, 0.4) solid 2px;
+    }
+
+    &:active {
+      background-color: var(--black-60);
+      color: var(--neutral-0);
+    }
+
+    &:disabled {
+      background-color: var(--black-10);
+      color: var(--black-30);
+      cursor: not-allowed;
+    }
+  }
+
+  .btn-secondary {
+    background-color: var(--black-6);
+    border: none;
+    border-radius: var(--spacing-4);
+    color: var(--neutral-700);
+    cursor: pointer;
+    font-family: var(--font-s2-family);
+    font-weight: var(--font-s2-weight);
+    font-size: var(--font-s2-size);
+    line-height: var(--font-s2-line-height);
+    letter-spacing: var(--font-s2-letter-spacing);
+    padding: var(--spacing-7) var(--spacing-10);
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--black-10);
+      color: var(--neutral-900);
+    }
+
+    &:focus {
+      background-color: var(--black-10);
+      color: var(--neutral-900);
+      outline: rgba(0, 56, 255, 0.4) solid 2px;
+    }
+
+    &:active {
+      background-color: var(--black-20);
+      color: var(--neutral-700);
+    }
+
+    &:disabled {
+      color: var(--black-10);
+      background-color: var(--black-4);
+      cursor: not-allowed;
+    }
+  }
+</style>
