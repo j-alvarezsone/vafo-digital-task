@@ -1,0 +1,98 @@
+---
+interface Props {
+  images: string[];
+}
+const { images } = Astro.props as Props;
+---
+
+<div class='carousel'>
+  <img id='main-image' src={images[0]} alt='Selected image' class='carousel__main-image' />
+
+  <div class='carousel__thumbnails'>
+    {images.map((img) => <img src={img} alt='Thumbnail' class='carousel__thumbnail' data-image={img} />)}
+  </div>
+</div>
+
+<script is:inline>
+  const thumbnails = document.querySelectorAll('.carousel__thumbnail');
+  const mainImage = document.getElementById('main-image');
+
+  const defaultThumbnail = document.querySelector(
+    `.carousel__thumbnail[data-image="${mainImage?.getAttribute('src')}"]`,
+  );
+
+  if (defaultThumbnail) {
+    defaultThumbnail.classList.add('carousel__thumbnail--active');
+  }
+
+  thumbnails.forEach((thumbnail) => {
+    thumbnail.addEventListener('click', (event) => {
+      const target = event.currentTarget;
+      const newImage = target.getAttribute('data-image');
+
+      if (target.classList.contains('carousel__thumbnail--active')) {
+        return;
+      }
+
+      if (newImage) {
+        mainImage?.setAttribute('src', newImage);
+
+        mainImage.classList.remove('carousel__main-image');
+
+        void mainImage.offsetWidth;
+        mainImage.classList.add('carousel__main-image');
+      }
+
+      thumbnails.forEach((thumb) => thumb.classList.remove('carousel__thumbnail--active'));
+      target.classList.add('carousel__thumbnail--active');
+    });
+  });
+</script>
+
+<style scoped>
+  .carousel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+  }
+
+  .carousel__main-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-medium);
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(0.97);
+    animation: fadeInScale 3s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  }
+
+  @keyframes fadeInScale {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .carousel__thumbnails {
+    display: flex;
+    gap: var(--spacing-4);
+  }
+
+  .carousel__thumbnail {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-small);
+    border: 2px solid transparent;
+    cursor: pointer;
+    object-fit: cover;
+    transition: transform 0.2s ease;
+  }
+
+  .carousel__thumbnail:hover {
+    transform: scale(1.05);
+  }
+
+  .carousel__thumbnail--active {
+    border-color: var(--brand-border, var(--purple-500));
+  }
+</style>
