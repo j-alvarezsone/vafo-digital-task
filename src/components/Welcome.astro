@@ -6,6 +6,7 @@ import InputText from './InputText.astro';
 import InputRadio from './InputRadio.astro';
 import Carousel from './Carousel.astro';
 import ResponsiveGrid from './ResponsiveGrid.astro';
+import Icon from './Icon.astro';
 
 const images = [
   'https://picsum.photos/600/600?random=1',
@@ -22,6 +23,7 @@ const images = [
     <Button> Primary Button </Button>
     <Button variant='secondary'> Secondary Button </Button>
   </div>
+
   <h2>Inputs</h2>
   <form>
     <InputText name='fullName' label='full name' placeholder='Enter your full name' />
@@ -38,10 +40,20 @@ const images = [
     <InputCheckbox name='check' label='I agree to the terms and conditions' />
     <InputRadio name='radio' label='Vue' />
   </form>
+
   <h2>Carousel</h2>
   <div class='carousel-container'>
     <Carousel images={images} />
   </div>
+
+  <h2>Icons</h2>
+  <div>
+    <Icon name='cart' />
+    <Icon name='user' />
+    <Icon name='search' />
+    <Icon name='star' />
+  </div>
+
   <h2>Grid</h2>
   <ResponsiveGrid />
 </div>

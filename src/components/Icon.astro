@@ -1,0 +1,53 @@
+---
+type IconName =
+  | 'cart'
+  | 'user'
+  | 'search'
+  | 'hamburger-menu'
+  | 'star'
+  | 'filled-star'
+  | 'half-star'
+  | 'chevron-up'
+  | 'chevron-down'
+  | 'chevron-left'
+  | 'chevron-right';
+
+interface Props {
+  name: IconName;
+  width?: string;
+  height?: string;
+}
+
+import Cart from './icons/Cart.astro';
+import User from './icons/User.astro';
+import Search from './icons/Search.astro';
+import HamburgerMenu from './icons/HamburgerMenu.astro';
+import Star from './icons/Star.astro';
+import FilledStar from './icons/FilledStar.astro';
+import HalfStar from './icons/HalfStar.astro';
+import ChevronUp from './icons/ChevronUp.astro';
+import ChevronDown from './icons/ChevronDown.astro';
+import ChevronLeft from './icons/ChevronLeft.astro';
+import ChevronRight from './icons/ChevronRight.astro';
+
+const icons = {
+  cart: Cart,
+  user: User,
+  search: Search,
+  'hamburger-menu': HamburgerMenu,
+  star: Star,
+  'filled-star': FilledStar,
+  'half-star': HalfStar,
+  'chevron-up': ChevronUp,
+  'chevron-down': ChevronDown,
+  'chevron-left': ChevronLeft,
+  'chevron-right': ChevronRight,
+};
+
+const { name, width = '24px', height = '24px' } = Astro.props;
+const IconComponent = icons[name];
+---
+
+<span>
+  {IconComponent ? <IconComponent width={width} height={height} /> : null}
+</span>
