@@ -5,6 +5,7 @@ import InputSelect from './InputSelect.astro';
 import InputText from './InputText.astro';
 import InputRadio from './InputRadio.astro';
 import Carousel from './Carousel.astro';
+import ResponsiveGrid from './ResponsiveGrid.astro';
 
 const images = [
   'https://picsum.photos/600/600?random=1',
@@ -38,7 +39,11 @@ const images = [
     <InputRadio name='radio' label='Vue' />
   </form>
   <h2>Carousel</h2>
-  <Carousel images={images} />
+  <div class='carousel-container'>
+    <Carousel images={images} />
+  </div>
+  <h2>Grid</h2>
+  <ResponsiveGrid />
 </div>
 
 <style>
@@ -47,7 +52,6 @@ const images = [
     flex-direction: column;
     align-items: center;
     height: 100%;
-    padding: var(--spacing-10);
     overflow-y: auto;
   }
 
@@ -71,7 +75,11 @@ const images = [
   }
 
   @media (max-width: 768px) {
-    #container {
+    form {
+      padding: var(--spacing-6);
+    }
+
+    .carousel-container {
       padding: var(--spacing-6);
     }
 
