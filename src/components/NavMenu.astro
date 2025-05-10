@@ -34,7 +34,7 @@ const navItems = [
   </div>
 </nav>
 
-<style is:global>
+<style>
   .nav-menu {
     background-color: var(--primary-surface);
     border-bottom: 1px solid var(--minimal-border);
@@ -91,7 +91,7 @@ const navItems = [
     gap: var(--spacing-4-5);
   }
 
-  .nav-menu__actions-icon {
+  :global(.nav-menu__actions-icon) {
     display: none;
   }
 
@@ -106,7 +106,7 @@ const navItems = [
       width: auto;
     }
 
-    .nav-menu__mobile-icon {
+    :global(.nav-menu__mobile-icon) {
       display: none;
     }
 
