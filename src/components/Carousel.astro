@@ -12,40 +12,59 @@ const { images } = Astro.props as Props;
   <img id='main-image' src={images[0]} alt='Selected image' class='carousel__main-image' />
 </section>
 
-<script is:inline>
+<script>
   const thumbnails = document.querySelectorAll('.carousel__thumbnail');
   const mainImage = document.getElementById('main-image');
+  const imagesArr = Array.from(thumbnails).map((t) => t.getAttribute('data-image'));
 
-  const defaultThumbnail = document.querySelector(
-    `.carousel__thumbnail[data-image="${mainImage?.getAttribute('src')}"]`,
-  );
-
-  if (defaultThumbnail) {
-    defaultThumbnail.classList.add('carousel__thumbnail--active');
+  function restartAnimation(el: HTMLElement) {
+    el.style.animation = 'none';
+    void el.offsetWidth;
+    el.style.animation = '';
   }
 
-  thumbnails.forEach((thumbnail) => {
-    thumbnail.addEventListener('click', (event) => {
-      const target = event.currentTarget;
-      const newImage = target.getAttribute('data-image');
-
-      if (target.classList.contains('carousel__thumbnail--active')) {
-        return;
+  function setActiveThumbnailBySrc(src: string | null) {
+    thumbnails.forEach((thumb) => {
+      if (thumb.getAttribute('data-image') === src) {
+        thumb.classList.add('carousel__thumbnail--active');
+      } else {
+        thumb.classList.remove('carousel__thumbnail--active');
       }
-
-      if (newImage) {
-        mainImage?.setAttribute('src', newImage);
-
-        mainImage.classList.remove('carousel__main-image');
-
-        void mainImage.offsetWidth;
-        mainImage.classList.add('carousel__main-image');
-      }
-
-      thumbnails.forEach((thumb) => thumb.classList.remove('carousel__thumbnail--active'));
-      target.classList.add('carousel__thumbnail--active');
     });
-  });
+  }
+
+  if (mainImage) {
+    setActiveThumbnailBySrc(mainImage.getAttribute('src'));
+
+    thumbnails.forEach((thumbnail) => {
+      thumbnail.addEventListener('click', () => {
+        const newImage = thumbnail.getAttribute('data-image');
+        if (thumbnail.classList.contains('carousel__thumbnail--active') || !newImage) return;
+        mainImage.setAttribute('src', newImage);
+        restartAnimation(mainImage);
+        setActiveThumbnailBySrc(newImage);
+      });
+    });
+
+    function isMobile() {
+      return window.innerWidth < 1024;
+    }
+
+    mainImage.addEventListener('click', function () {
+      if (!isMobile()) return;
+      const currentSrc = mainImage.getAttribute('src');
+      let idx = imagesArr.indexOf(currentSrc);
+
+      if (idx === -1) idx = 0;
+
+      let nextIdx = (idx + 1) % imagesArr.length;
+      const nextImage = imagesArr[nextIdx] || '';
+
+      mainImage.setAttribute('src', nextImage);
+      restartAnimation(mainImage);
+      setActiveThumbnailBySrc(nextImage);
+    });
+  }
 </script>
 
 <style scoped>
