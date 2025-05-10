@@ -5,13 +5,12 @@ interface Props {
 const { images } = Astro.props as Props;
 ---
 
-<div class='carousel'>
-  <img id='main-image' src={images[0]} alt='Selected image' class='carousel__main-image' />
-
+<section class='carousel'>
   <div class='carousel__thumbnails'>
     {images.map((img) => <img src={img} alt='Thumbnail' class='carousel__thumbnail' data-image={img} />)}
   </div>
-</div>
+  <img id='main-image' src={images[0]} alt='Selected image' class='carousel__main-image' />
+</section>
 
 <script is:inline>
   const thumbnails = document.querySelectorAll('.carousel__thumbnail');
@@ -52,18 +51,18 @@ const { images } = Astro.props as Props;
 <style scoped>
   .carousel {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: var(--spacing-6);
   }
 
   .carousel__main-image {
     width: 100%;
     aspect-ratio: 1 / 1;
-    border-radius: var(--radius-medium);
     object-fit: cover;
     opacity: 0;
     transform: scale(0.97);
     animation: fadeInScale 3s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+    z-index: 10;
   }
 
   @keyframes fadeInScale {
@@ -74,25 +73,38 @@ const { images } = Astro.props as Props;
   }
 
   .carousel__thumbnails {
-    display: flex;
-    gap: var(--spacing-4);
+    display: none;
+    flex-direction: column;
+    gap: var(--spacing-5);
   }
 
   .carousel__thumbnail {
-    width: 64px;
-    height: 64px;
-    border-radius: var(--radius-small);
+    width: 140px;
+    height: 140px;
+    border-radius: var(--radius-medium);
     border: 2px solid transparent;
     cursor: pointer;
     object-fit: cover;
     transition: transform 0.2s ease;
-  }
 
-  .carousel__thumbnail:hover {
-    transform: scale(1.05);
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   .carousel__thumbnail--active {
-    border-color: var(--brand-border, var(--purple-500));
+    border-color: var(--primary-border);
+  }
+
+  @media (min-width: 1024px) {
+    .carousel__thumbnails {
+      display: flex;
+    }
+
+    .carousel__main-image {
+      height: 737px;
+      object-fit: fill;
+      border-radius: var(--radius-medium);
+    }
   }
 </style>

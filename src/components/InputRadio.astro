@@ -4,16 +4,29 @@ interface Props {
   name: string;
   disabled?: boolean;
   bordered?: boolean;
+  width?: string | number;
+  value: string;
+  required?: boolean;
 }
 
-const { label, name, disabled = false, bordered = true } = Astro.props;
+const { label, name, disabled = false, bordered = true, width, value, required = false } = Astro.props;
+
+const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : 'width: 100%';
 ---
 
-<div class={`input-radio ${bordered ? 'input-radio--border' : 'input-radio--no-border'}`}>
-  <label for={name} class={`font-p2  ${disabled ? 'input-radio__label--disabled' : 'input-radio__label'}`}>
+<div class={`input-radio ${bordered ? 'input-radio--border' : 'input-radio--no-border'}`} style={widthStyle}>
+  <label for={value} class={`font-p2  ${disabled ? 'input-radio__label--disabled' : 'input-radio__label'}`}>
     {label}
   </label>
-  <input id={name} type='radio' name={name} class='input-radio__input' disabled={disabled} />
+  <input
+    id={value}
+    type='radio'
+    name={name}
+    class='input-radio__input'
+    disabled={disabled}
+    required={required}
+    value={value}
+  />
 </div>
 
 <style>
@@ -22,8 +35,8 @@ const { label, name, disabled = false, bordered = true } = Astro.props;
     display: flex;
     flex-direction: row;
     gap: var(--spacing-4);
-    justify-content: flex-start;
-    padding: var(--spacing-5, --spacing-6);
+    justify-content: space-between;
+    padding: var(--spacing-6);
   }
 
   .input-radio--border {
@@ -92,12 +105,12 @@ const { label, name, disabled = false, bordered = true } = Astro.props;
     }
   }
 
-  .input-radio:has(.input-radio__input:checked):has(.input-radio--border) {
+  .input-radio--border:has(.input-radio__input:checked) {
     border: 1px solid var(--primary-border);
+  }
 
-    &:active {
-      border: 2px solid var(--primary-border);
-    }
+  .input-radio--border:has(.input-radio__input:checked):active {
+    border: 2px solid var(--primary-border);
   }
 
   .input-radio.input-radio--border:has(.input-radio__input:disabled) {

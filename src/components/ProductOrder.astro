@@ -1,0 +1,289 @@
+---
+import Button from './Button.astro';
+import InputSelect from './InputSelect.astro';
+import InputRadio from './InputRadio.astro';
+import Carousel from './Carousel.astro';
+import BreadcrumbNav from './BreadcrumbNav.astro';
+import ProductPrice from './ProductPrice.astro';
+
+const images = [
+  '/images/carousel/carousel.png',
+  'https://picsum.photos/737/737?random=2',
+  'https://picsum.photos/737/737?random=3',
+];
+const quantityOptions = [
+  { value: '1', label: '1' },
+  { value: '2', label: '2' },
+  { value: '3', label: '3' },
+  { value: '4', label: '4' },
+  { value: '5', label: '5' },
+];
+
+const deliveryFrequencyOptions = [
+  { value: '1_week', label: '1 week' },
+  { value: '2_weeks', label: '2 weeks' },
+  { value: '3_weeks', label: '3 weeks' },
+  { value: '4_weeks', label: '4 weeks' },
+  { value: '5_weeks', label: '5 weeks' },
+  { value: '30_days', label: '30 days' },
+];
+---
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const oneOffRadio = document.getElementById('one-off') as HTMLInputElement;
+    const subscriptionRadio = document.getElementById('subscription') as HTMLInputElement;
+    const deliverySelect = document.getElementById('delivery-frequency') as HTMLSelectElement;
+
+    const priceCurrent = document.querySelector('.product-price__current') as HTMLElement;
+    const priceOriginal = document.querySelector('.product-price__original') as HTMLElement;
+    const pricePoints = document.querySelector('.product-price__points') as HTMLElement;
+
+    function updateSelectDisabled() {
+      if (oneOffRadio && oneOffRadio.checked) {
+        if (deliverySelect) deliverySelect.disabled = true;
+
+        if (priceCurrent) {
+          priceCurrent.textContent = '£8.49';
+          priceCurrent.style.color = 'var(--primary-text)';
+        }
+
+        if (priceOriginal) {
+          priceOriginal.style.display = 'none';
+        }
+
+        if (pricePoints) {
+          pricePoints.textContent = '+8 PoochPoints';
+        }
+      } else {
+        if (deliverySelect) deliverySelect.disabled = false;
+
+        if (priceCurrent) {
+          priceCurrent.textContent = '£6.37';
+          priceCurrent.style.color = '';
+        }
+
+        if (priceOriginal) {
+          priceOriginal.style.display = '';
+        }
+
+        if (pricePoints) {
+          pricePoints.textContent = '+18 PoochPoints';
+        }
+      }
+    }
+
+    if (oneOffRadio) oneOffRadio.addEventListener('change', updateSelectDisabled);
+    if (subscriptionRadio) subscriptionRadio.addEventListener('change', updateSelectDisabled);
+
+    updateSelectDisabled();
+  });
+
+  document.querySelector('.product-form')?.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const target = event.target as HTMLFormElement;
+    if (!target) return;
+
+    const formData = new FormData(target);
+    const data = Object.fromEntries(formData.entries());
+
+    console.log(data);
+  });
+</script>
+
+<main id='container'>
+  <section class='breadcrumb-wrapper--mobile'>
+    <BreadcrumbNav />
+  </section>
+  <section class='carousel'>
+    <Carousel images={images} />
+  </section>
+  <section class='product-content'>
+    <BreadcrumbNav hiddenOnMobile />
+    <h1 class='product-content__title'>Health & Digestion Dry Food</h1>
+    <ProductPrice current='6.37' original='8.49' points='18' />
+    <form class='product-form'>
+      <InputSelect
+        name='quantity'
+        label='quantity'
+        placeholder='Select quantity'
+        options={quantityOptions}
+        required
+        selectFirst
+      />
+      <div class='product-form__subscribe'>
+        <p class='product-form__subscribe-label font-s1'>Subscribe & Save 25%!</p>
+        <div class='product-form__subscribe-inputs'>
+          <InputRadio value='subscription' name='subscribe' label='Subscription' required />
+          <InputRadio value='one-off' name='subscribe' label='One-off' required />
+        </div>
+        <InputSelect
+          name='delivery-frequency'
+          label='delivery frequency'
+          placeholder='Select delivery frequency'
+          options={deliveryFrequencyOptions}
+          required
+        />
+      </div>
+      <div class='product-form__footer'>
+        <div class='product-form__button-wrapper'>
+          <Button type='submit'> Add to Basket </Button>
+        </div>
+        <div class='product-form__description'>
+          <p class='product-form__description-text font-p2'>
+            Grain-free, junk-free complete dry food for sensitive dogs
+          </p>
+          <ul class='product-form__description-list'>
+            <li class='product-form__description-item font-p2'>Hypoallergenic</li>
+            <li class='product-form__description-item font-p2'>Vet recommended</li>
+            <li class='product-form__description-item font-p2'>Prebiotics for gut health</li>
+          </ul>
+        </div>
+      </div>
+    </form>
+  </section>
+</main>
+
+<style>
+  #container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-surface);
+  }
+
+  .breadcrumb-wrapper--mobile {
+    padding: var(--spacing-2) var(--spacing-6);
+  }
+
+  .product-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    padding: var(--spacing-6);
+  }
+
+  .product-content__title {
+    color: var(--primary-text);
+    margin: 0;
+    font-family: var(--font-h2-family);
+    font-weight: var(--font-h2-weight);
+    font-size: var(--font-h2-size);
+    line-height: var(--font-h2-line-height);
+    letter-spacing: var(--font-h2-letter-spacing);
+  }
+
+  .product-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+  }
+
+  .product-form__subscribe {
+    background-color: var(--brand-surface);
+    border: 1px solid var(--minimal-border);
+    border-radius: var(--radius-medium);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    padding: var(--spacing-6);
+  }
+
+  .product-form__subscribe-label {
+    margin: 0;
+    color: var(--primary-text);
+  }
+
+  .product-form__subscribe-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    width: 100%;
+  }
+
+  .product-form__footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+  }
+
+  .product-form__button-wrapper {
+    order: 1;
+    background-color: var(--primary-surface);
+    padding: var(--spacing-5) var(--spacing-6) var(--spacing-8) var(--spacing-6);
+    border-radius: var(--radius-medium);
+    filter: drop-shadow(0 0 25px rgb(0 0 0 / 0.3));
+    margin-left: calc(-1 * var(--spacing-6));
+    margin-right: calc(-1 * var(--spacing-6));
+    margin-bottom: calc(-1 * var(--spacing-6));
+  }
+
+  .product-form__description-list {
+    margin: 0;
+  }
+
+  .product-form__description-text {
+    color: var(--secondary-text);
+    margin: 0;
+  }
+
+  .product-form__description-item {
+    color: var(--secondary-text);
+    order: 0;
+  }
+
+  @media (min-width: 1024px) {
+    #container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(1, 1fr);
+      gap: var(--spacing-10);
+      padding: var(--spacing-7) var(--spacing-10) var(--spacing-12) var(--spacing-10);
+    }
+
+    .breadcrumb-wrapper--mobile {
+      display: none;
+    }
+
+    .breadcrumb--hidden {
+      display: block;
+    }
+
+    .carousel {
+      grid-column: 1 / span 3;
+    }
+
+    .product-content {
+      grid-column: 4 / span 1;
+      padding: 0;
+    }
+
+    .product-content__title {
+      font-family: var(--font-h1-family);
+      font-weight: var(--font-h1-weight);
+      font-size: var(--font-h1-size);
+      line-height: var(--font-h1-line-height);
+      letter-spacing: var(--font-h1-letter-spacing);
+    }
+
+    .product-form__subscribe-inputs {
+      flex-direction: row;
+      gap: var(--spacing-4);
+    }
+
+    .product-form__button-wrapper {
+      margin-top: var(--spacing-4);
+      order: 0;
+      background-color: unset;
+      padding: unset;
+      border-radius: unset;
+      filter: unset;
+      margin-left: unset;
+      margin-right: unset;
+      margin-bottom: unset;
+    }
+
+    .product-form__description-item {
+      order: 1;
+    }
+  }
+</style>

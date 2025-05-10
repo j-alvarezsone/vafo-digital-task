@@ -6,11 +6,12 @@ interface Props {
   autoComplete?: string;
   width?: string | number;
   disabled?: boolean;
+  required?: boolean;
 }
 
-const { label, name, placeholder, autoComplete = 'off', width, disabled = false } = Astro.props;
+const { label, name, placeholder, autoComplete = 'off', width, disabled = false, required = false } = Astro.props;
 
-const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : '100%';
+const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : 'width: 100%';
 ---
 
 <div class='input-text' style={`width: ${widthStyle};`}>
@@ -25,6 +26,7 @@ const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : 
     class='input-text__input'
     autocomplete={autoComplete}
     disabled={disabled}
+    required={required}
   />
 </div>
 
@@ -54,6 +56,10 @@ const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : 
     outline: none;
     padding: var(--spacing-6);
     width: 100%;
+    font-family: var(--font-p1-family);
+    font-weight: var(--font-p1-weight);
+    font-size: var(--font-p1-size);
+    letter-spacing: var(--font-p1-letter-spacing);
 
     &::placeholder {
       color: var(--disabled-text);
@@ -69,7 +75,7 @@ const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : 
     }
 
     &:not(:focus):not(:placeholder-shown):not(:hover) {
-      border: 2px solid var(--primary-border);
+      border: 1px solid var(--primary-border);
     }
 
     &:not(:placeholder-shown) {

@@ -16,6 +16,7 @@ interface Props {
   name: IconName;
   width?: string;
   height?: string;
+  class?: string;
 }
 
 import Cart from './icons/Cart.astro';
@@ -44,10 +45,8 @@ const icons = {
   'chevron-right': ChevronRight,
 };
 
-const { name, width = '24px', height = '24px' } = Astro.props;
+const { name, width = '24px', height = '24px', class: className = '' } = Astro.props;
 const IconComponent = icons[name];
 ---
 
-<span>
-  {IconComponent ? <IconComponent width={width} height={height} /> : null}
-</span>
+{IconComponent ? <IconComponent width={width} height={height} class={className} /> : null}

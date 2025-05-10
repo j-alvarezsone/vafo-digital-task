@@ -4,16 +4,20 @@ interface Props {
   name: string;
   disabled?: boolean;
   bordered?: boolean;
+  width?: string | number;
+  required?: boolean;
 }
 
-const { label, name, disabled = false, bordered = true } = Astro.props;
+const { label, name, disabled = false, bordered = true, width, required = false } = Astro.props;
+
+const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : 'width: 100%';
 ---
 
-<div class={`input-checkbox ${bordered ? 'input-checkbox--border' : 'input-checkbox--no-border'}`}>
+<div class={`input-checkbox ${bordered ? 'input-checkbox--border' : 'input-checkbox--no-border'}`} style={widthStyle}>
   <label for={name} class={`font-p2  ${disabled ? 'input-checkbox__label--disabled' : 'input-checkbox__label'}`}>
     {label}
   </label>
-  <input id={name} type='checkbox' name={name} class='input-checkbox__input' disabled={disabled} />
+  <input id={name} type='checkbox' name={name} class='input-checkbox__input' disabled={disabled} required={required} />
 </div>
 
 <style>
@@ -23,7 +27,7 @@ const { label, name, disabled = false, bordered = true } = Astro.props;
     flex-direction: row-reverse;
     gap: var(--spacing-4);
     justify-content: flex-end;
-    padding: var(--spacing-5, --spacing-6);
+    padding: var(--spacing-6);
   }
 
   .input-checkbox--border {
@@ -96,12 +100,12 @@ const { label, name, disabled = false, bordered = true } = Astro.props;
     }
   }
 
-  .input-checkbox:has(.input-checkbox__input:checked):has(.input-checkbox--border) {
+  .input-checkbox--border:has(.input-checkbox__input:checked) {
     border: 1px solid var(--primary-border);
+  }
 
-    &:active {
-      border: 2px solid var(--primary-border);
-    }
+  .input-checkbox--border:has(.input-checkbox__input:checked):active {
+    border: 2px solid var(--primary-border);
   }
 
   .input-checkbox.input-checkbox--border:has(.input-checkbox__input:disabled) {

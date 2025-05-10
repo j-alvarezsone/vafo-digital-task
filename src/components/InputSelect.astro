@@ -11,11 +11,23 @@ interface Props {
   options: Option[];
   width?: string | number;
   disabled?: boolean;
+  required?: boolean;
+  selectFirst?: boolean;
 }
 
-const { label, name, placeholder, options, width, disabled = false } = Astro.props;
+const {
+  label,
+  name,
+  placeholder,
+  options,
+  width,
+  disabled = false,
+  required = false,
+  selectFirst = false,
+} = Astro.props;
 
-const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : '100%';
+const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : 'width: 100%';
+const selectedValue = selectFirst && options.length > 0 ? options[0].value : '';
 ---
 
 <div class='input-select' style={`width: ${widthStyle};`}>
@@ -23,9 +35,27 @@ const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : 
     {label}
   </label>
   <div class='input-select__wrapper'>
-    <select id={name} class='input-select__input' name={name} disabled={disabled} required>
-      <option value='' disabled selected hidden> {placeholder}</option>
-      {options.map((option) => <option value={option.value}>{option.label}</option>)}
+    <select
+      id={name}
+      class='input-select__input'
+      name={name}
+      disabled={disabled}
+      required={required}
+      value={selectedValue}>
+      {
+        !selectFirst && (
+          <option value='' disabled selected hidden>
+            {placeholder}
+          </option>
+        )
+      }
+      {
+        options.map((option, idx) => (
+          <option value={option.value} selected={selectFirst && idx === 0}>
+            {option.label}
+          </option>
+        ))
+      }
     </select>
     <div class='input-select__arrow'></div>
   </div>
@@ -60,13 +90,17 @@ const widthStyle = width ? (typeof width === 'number' ? `${width}px` : width) : 
     outline: none;
     padding: var(--spacing-6);
     width: 100%;
+    font-family: var(--font-p1-family);
+    font-weight: var(--font-p1-weight);
+    font-size: var(--font-p1-size);
+    letter-spacing: var(--font-p1-letter-spacing);
 
     &:invalid {
       color: var(--disabled-text);
     }
 
     &:valid {
-      border: 2px solid var(--primary-border);
+      border: 1px solid var(--primary-border);
     }
 
     &:hover {

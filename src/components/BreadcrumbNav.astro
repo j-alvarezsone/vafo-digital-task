@@ -1,0 +1,67 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  hiddenOnMobile?: boolean;
+}
+const { hiddenOnMobile = false } = Astro.props as Props;
+
+const items = [
+  { name: 'Shop all', link: '#' },
+  { name: 'Dry Food', link: '#' },
+  { name: 'Health & Digestion Dry Food', link: '#' },
+];
+---
+
+<div class={`breadcrumb ${hiddenOnMobile ? 'breadcrumb--hidden-on-mobile' : ''}`}>
+  {
+    items.map((item, index) => (
+      <span class={`breadcrumb__item font-c1 ${index === items.length - 1 ? 'breadcrumb__item--active' : ''}`}>
+        <a href={item.link} class='breadcrumb__link'>
+          {item.name}
+        </a>
+        {index < items.length - 1 && <Icon name='chevron-right' width='12' height='12' />}
+      </span>
+    ))
+  }
+</div>
+
+<style>
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-3);
+    font-size: var(--font-size-sm);
+    color: var(--minimal-text);
+  }
+
+  .breadcrumb__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+  }
+
+  .breadcrumb__link {
+    text-decoration: none;
+    color: var(--minimal-text);
+  }
+
+  .breadcrumb__item--active .breadcrumb__link {
+    color: var(--secondary-text);
+    pointer-events: none;
+  }
+
+  .breadcrumb__link:hover {
+    text-decoration: underline;
+  }
+
+  .breadcrumb--hidden-on-mobile {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .breadcrumb--hidden-on-mobile {
+      display: flex;
+    }
+  }
+</style>

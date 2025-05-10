@@ -1,0 +1,37 @@
+---
+interface Props {
+  current: string;
+  original?: string;
+  points?: string;
+}
+
+const { current, original, points } = Astro.props;
+---
+
+<p class='product-price'>
+  <span class='product-price__current font-h3'>£{current}</span>
+  <span class='product-price__original font-p1'>£{original}</span>
+  <span class='product-price__points font-s2'>+{points} PoochPoints</span>
+</p>
+
+<style>
+  .product-price {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    margin: 0;
+  }
+
+  .product-price__current {
+    color: var(--brand-text);
+  }
+
+  .product-price__original {
+    color: var(--primary-text);
+    text-decoration: line-through;
+  }
+
+  .product-price__points {
+    color: var(--brand-text);
+  }
+</style>

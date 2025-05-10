@@ -1,0 +1,126 @@
+---
+import Icon from './Icon.astro';
+
+const navItems = [
+  { name: 'Shop', href: '#' },
+  { name: 'Find your food', href: '#' },
+  { name: 'About', href: '#' },
+  { name: 'Blog', href: '#' },
+];
+---
+
+<nav class='nav-menu'>
+  <div class='nav-menu__container'>
+    <Icon class='nav-menu__mobile-icon' name='hamburger-menu' />
+    <div class='nav-menu__link-container'>
+      <ul class='nav-menu__list'>
+        {
+          navItems.map((item) => (
+            <li class='nav-menu__item font-p2'>
+              <a class='nav-menu__link' href={item.href}>
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <img class='nav-menu__logo' src='/images/logo.svg' alt='Logo' />
+    <div class='nav-menu__actions'>
+      <Icon class='nav-menu__actions-icon' name='search' />
+      <Icon class='nav-menu__actions-icon' name='user' />
+      <Icon name='cart' />
+    </div>
+  </div>
+</nav>
+
+<style is:global>
+  .nav-menu {
+    background-color: var(--primary-surface);
+    border-bottom: 1px solid var(--minimal-border);
+    padding: var(--spacing-4) var(--spacing-6);
+    width: 100%;
+    height: 60px;
+  }
+
+  .nav-menu__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .nav-menu__link-container {
+    display: none;
+    width: 100%;
+  }
+
+  .nav-menu__list {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-5);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-menu__item {
+    padding: var(--spacing-4-5) var(--spacing-5);
+  }
+
+  .nav-menu__link {
+    text-decoration: none;
+    color: var(--secondary-text);
+  }
+
+  .nav-menu__logo {
+    width: 90px;
+    height: auto;
+    position: static;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .nav-menu__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4-5);
+  }
+
+  .nav-menu__actions-icon {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .nav-menu {
+      padding: var(--spacing-5) var(--spacing-10);
+      height: 68px;
+    }
+
+    .nav-menu__link-container {
+      display: block;
+      width: auto;
+    }
+
+    .nav-menu__mobile-icon {
+      display: none;
+    }
+
+    .nav-menu__logo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      display: block;
+    }
+
+    .nav-menu__actions-icon {
+      display: block;
+    }
+  }
+</style>
